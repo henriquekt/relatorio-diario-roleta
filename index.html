@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerador de Relatório Diário</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="form-panel" aria-labelledby="form-title">
+        <div class="panel-heading">
+          <p>HL Digital</p>
+          <h1 id="form-title">Gerador de Dashboard Diário</h1>
+        </div>
+
+        <form id="report-form" class="report-form">
+          <fieldset>
+            <legend>Dados gerais</legend>
+            <label>
+              Data do relatório
+              <input id="reportDate" name="reportDate" type="text" value="18/05/2026" />
+            </label>
+            <label>
+              Clientes do dia
+              <input id="clients" name="clients" type="number" min="0" value="33" />
+            </label>
+            <label>
+              Compras acima de R$20
+              <input id="purchases20" name="purchases20" type="number" min="0" value="15" />
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Participação por período</legend>
+            <label>
+              Manhã
+              <input id="morning" name="morning" type="number" min="0" value="2" />
+            </label>
+            <label>
+              Tarde
+              <input id="afternoon" name="afternoon" type="number" min="0" value="6" />
+            </label>
+            <label>
+              Noite
+              <input id="night" name="night" type="number" min="0" value="6" />
+            </label>
+            <label>
+              Horário mais movimentado
+              <select id="busiestPeriod" name="busiestPeriod">
+                <option value="Manhã">Manhã</option>
+                <option value="Tarde">Tarde</option>
+                <option value="Noite" selected>Noite</option>
+              </select>
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Faturamento</legend>
+            <label>
+              Coxinha no Pote
+              <input id="revenueCoxinha" name="revenueCoxinha" type="text" value="R$ 514,50" />
+            </label>
+            <label>
+              Mister Mix
+              <input id="revenueMix" name="revenueMix" type="text" value="R$ 454,90" />
+            </label>
+            <label>
+              Delivery
+              <input id="revenueDelivery" name="revenueDelivery" type="text" value="R$ 132,00" />
+            </label>
+            <label>
+              Ticket médio
+              <input id="averageTicket" name="averageTicket" type="text" value="R$ 25,00" />
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Delivery e marketing</legend>
+            <label>
+              Vendas delivery
+              <input id="deliverySales" name="deliverySales" type="number" min="0" value="4" />
+            </label>
+            <label>
+              Investimento em anúncios
+              <input id="adInvestment" name="adInvestment" type="text" value="R$ 30,00" />
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Prêmios sorteados</legend>
+            <label>
+              Pote P de Coxinha
+              <input id="prizeCoxinha" name="prizeCoxinha" type="number" min="0" value="4" />
+            </label>
+            <label>
+              Milk Shake
+              <input id="prizeShake" name="prizeShake" type="number" min="0" value="3" />
+            </label>
+            <label>
+              Casquinha
+              <input id="prizeCone" name="prizeCone" type="number" min="0" value="2" />
+            </label>
+            <label>
+              Mini Sundae
+              <input id="prizeSundae" name="prizeSundae" type="number" min="0" value="0" />
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Operação</legend>
+            <label>
+              Problemas
+              <input id="problems" name="problems" type="number" min="0" value="0" />
+            </label>
+            <label>
+              Dificuldades
+              <input id="difficulties" name="difficulties" type="number" min="0" value="0" />
+            </label>
+            <label>
+              Falta de produtos/brindes
+              <input id="missingItems" name="missingItems" type="number" min="0" value="0" />
+            </label>
+          </fieldset>
+
+          <div class="actions">
+            <button class="primary-button" type="button" id="updateDashboard">Gerar / Atualizar Dashboard</button>
+            <button class="secondary-button" type="button" id="downloadPng">Baixar imagem PNG</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="preview-panel" aria-labelledby="preview-title">
+        <div class="preview-heading">
+          <h2 id="preview-title">Prévia do dashboard</h2>
+          <p>Formato vertical para WhatsApp</p>
+        </div>
+
+        <article id="dashboard" class="dashboard-card">
+          <header class="dashboard-header">
+            <div class="wheel-icon" aria-hidden="true">
+              <span>★</span>
+            </div>
+            <div>
+              <p>RELATÓRIO DIÁRIO</p>
+              <h2>JORNADA DO CLIENTE / ROLETA</h2>
+            </div>
+            <div class="date-group">
+              <span>📅 DATA:</span>
+              <b id="viewDate" class="date-pill">18/05/2026</b>
+            </div>
+          </header>
+
+          <section class="top-grid">
+            <div class="metric-stack">
+              <div class="mini-card">
+                <span class="metric-icon sales">👥</span>
+                <p>Clientes do dia</p>
+                <strong id="viewClients">33</strong>
+                <small>Pessoas entraram na loja</small>
+              </div>
+              <div class="mini-card">
+                <span class="metric-icon gold">🎟</span>
+                <p>Compras acima de R$20</p>
+                <strong id="viewPurchases20">15</strong>
+                <small>Pessoas</small>
+              </div>
+            </div>
+
+            <div class="hero-revenue">
+              <p>Faturamento do dia</p>
+              <strong id="viewTotalRevenue">R$ 1.101,40</strong>
+              <div class="revenue-table">
+                <div><span>Coxinha no Pote</span><b id="viewRevenueCoxinha">R$ 514,50</b></div>
+                <div><span>Mister Mix</span><b id="viewRevenueMix">R$ 454,90</b></div>
+                <div><span>Delivery</span><b id="viewRevenueDelivery">R$ 132,00</b></div>
+                <div class="total-row"><span>Total geral</span><b id="viewTotalRevenueTable">R$ 1.101,40</b></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="two-column">
+            <div class="dashboard-section blue-section">
+              <div class="section-title">
+                <span>📊</span>
+                <h3>Participação por período</h3>
+              </div>
+              <div class="period-grid">
+                <div><span>Manhã</span><strong id="viewMorning">2</strong></div>
+                <div><span>Tarde</span><strong id="viewAfternoon">6</strong></div>
+                <div><span>Noite</span><strong id="viewNight">6</strong></div>
+              </div>
+            </div>
+
+            <div class="dashboard-section prize-section">
+              <div class="section-title">
+                <span>🎁</span>
+                <h3>Prêmios sorteados</h3>
+              </div>
+              <div class="list-lines">
+                <div><span>Pote P de Coxinha</span><b id="viewPrizeCoxinha">4</b></div>
+                <div><span>Milk Shake</span><b id="viewPrizeShake">3</b></div>
+                <div><span>Casquinha</span><b id="viewPrizeCone">2</b></div>
+                <div><span>Mini Sundae</span><b id="viewPrizeSundae">0</b></div>
+              </div>
+              <div class="highlight-line">
+                <span>Prêmio mais sorteado</span>
+                <strong id="viewTopPrize">Pote P de Coxinha</strong>
+              </div>
+            </div>
+          </section>
+
+          <section class="info-grid">
+            <div class="dashboard-section green-section">
+              <div class="section-title">
+                <span>💵</span>
+                <h3>Vendas</h3>
+              </div>
+              <div class="list-lines compact">
+                <div><span>Ticket médio</span><b id="viewAverageTicket">R$ 25,00</b></div>
+                <div><span>Horário mais movimentado</span><b id="viewBusiestPeriod">Noite</b></div>
+              </div>
+            </div>
+
+            <div class="dashboard-section delivery-section">
+              <div class="section-title">
+                <span>🛵</span>
+                <h3>Delivery</h3>
+              </div>
+              <div class="list-lines compact">
+                <div><span>Vendas realizadas</span><b id="viewDeliverySales">4</b></div>
+                <div><span>Faturamento delivery</span><b id="viewDeliveryRevenueAgain">R$ 132,00</b></div>
+              </div>
+            </div>
+
+            <div class="dashboard-section marketing-section">
+              <div class="section-title">
+                <span>📣</span>
+                <h3>Marketing</h3>
+              </div>
+              <div class="list-lines compact">
+                <div><span>Investimento em anúncios</span><b id="viewAdInvestment">R$ 30,00</b></div>
+                <div><span>Tipo de campanha</span><b>Reconhecimento</b></div>
+              </div>
+            </div>
+
+            <div class="dashboard-section operation-section">
+              <div class="section-title">
+                <span>⚙</span>
+                <h3>Operação</h3>
+              </div>
+              <div class="operation-grid">
+                <div><span>Problemas</span><b id="viewProblems">0</b></div>
+                <div><span>Dificuldades</span><b id="viewDifficulties">0</b></div>
+                <div><span>Falta produtos/brindes</span><b id="viewMissingItems">0</b></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="summary-section">
+            <div class="section-title">
+              <span>⭐</span>
+              <h3>Resumo do dia</h3>
+            </div>
+            <div class="summary-grid">
+              <div><span>👥 Clientes atendidos</span><strong id="summaryClients">33</strong></div>
+              <div><span>🎟 Compras acima de R$20</span><strong id="summaryPurchases20">15</strong></div>
+              <div><span>◎ Participantes da roleta</span><strong id="summaryParticipants">15</strong></div>
+              <div><span>🛵 Vendas delivery</span><strong id="summaryDeliverySales">4</strong></div>
+              <div class="summary-total"><span>💰 Faturamento total</span><strong id="summaryTotalRevenue">R$ 1.101,40</strong></div>
+            </div>
+          </section>
+        </article>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
