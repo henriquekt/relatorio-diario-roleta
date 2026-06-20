@@ -133,11 +133,18 @@ async function downloadDashboardPng() {
 
   downloadButton.disabled = true;
   downloadButton.textContent = "Gerando PNG...";
+  document.body.classList.add("exporting-dashboard");
 
   try {
+    await new Promise((resolve) => requestAnimationFrame(resolve));
+
     const canvas = await html2canvas(dashboard, {
       backgroundColor: "#07110f",
-      scale: 2,
+      width: 1080,
+      height: 1920,
+      windowWidth: 1200,
+      windowHeight: 2100,
+      scale: 1,
       useCORS: true,
     });
 
@@ -162,6 +169,7 @@ async function downloadDashboardPng() {
     console.error(error);
     alert("Não foi possível baixar a imagem. Se estiver abrindo como arquivo local, publique no GitHub Pages ou rode em um servidor local.");
   } finally {
+    document.body.classList.remove("exporting-dashboard");
     downloadButton.disabled = false;
     downloadButton.textContent = "Baixar imagem PNG";
   }
