@@ -749,6 +749,168 @@ select:focus {
   color: #f7e9aa;
 }
 
+/* Modo usado somente no momento de baixar o PNG.
+   Mantem o arquivo final em 1080x1920, formato retrato para celular. */
+body.exporting-dashboard {
+  overflow: hidden;
+}
+
+body.exporting-dashboard .dashboard-card {
+  width: 1080px;
+  height: 1920px;
+  max-width: none;
+  padding: 44px;
+}
+
+body.exporting-dashboard .dashboard-header {
+  grid-template-columns: 150px 1fr;
+  gap: 22px;
+}
+
+body.exporting-dashboard .wheel-icon {
+  width: 136px;
+  height: 136px;
+}
+
+body.exporting-dashboard .dashboard-header p {
+  font-size: 1.05rem;
+}
+
+body.exporting-dashboard .dashboard-header h2 {
+  font-size: 4.2rem;
+}
+
+body.exporting-dashboard .date-group {
+  font-size: 1.35rem;
+}
+
+body.exporting-dashboard .date-pill {
+  font-size: 1.35rem;
+  padding: 12px 20px;
+}
+
+body.exporting-dashboard .top-grid,
+body.exporting-dashboard .two-column,
+body.exporting-dashboard .info-grid {
+  gap: 20px;
+  margin-top: 20px;
+}
+
+body.exporting-dashboard .top-grid {
+  grid-template-columns: 330px 1fr;
+}
+
+body.exporting-dashboard .mini-card {
+  min-height: 190px;
+  grid-template-columns: 98px 1fr;
+  padding: 24px;
+}
+
+body.exporting-dashboard .metric-icon {
+  width: 86px;
+  height: 86px;
+  font-size: 2.55rem;
+}
+
+body.exporting-dashboard .mini-card p,
+body.exporting-dashboard .mini-card small {
+  font-size: 1.05rem;
+}
+
+body.exporting-dashboard .mini-card strong {
+  font-size: 4.15rem;
+}
+
+body.exporting-dashboard .hero-revenue {
+  min-height: 400px;
+  padding: 34px;
+}
+
+body.exporting-dashboard .hero-revenue p {
+  font-size: 1.18rem;
+}
+
+body.exporting-dashboard .hero-revenue > strong {
+  font-size: 6.6rem;
+}
+
+body.exporting-dashboard .revenue-table {
+  width: 620px;
+}
+
+body.exporting-dashboard .revenue-table div,
+body.exporting-dashboard .list-lines div {
+  padding: 14px 16px;
+}
+
+body.exporting-dashboard .revenue-table span,
+body.exporting-dashboard .revenue-table b,
+body.exporting-dashboard .list-lines span,
+body.exporting-dashboard .list-lines b,
+body.exporting-dashboard .period-grid span,
+body.exporting-dashboard .operation-grid span,
+body.exporting-dashboard .summary-grid span {
+  font-size: 1.08rem;
+}
+
+body.exporting-dashboard .dashboard-section,
+body.exporting-dashboard .summary-section {
+  padding: 22px;
+}
+
+body.exporting-dashboard .section-title {
+  margin: -22px -22px 18px;
+  padding: 14px 22px;
+}
+
+body.exporting-dashboard .section-title h3 {
+  font-size: 1.35rem;
+}
+
+body.exporting-dashboard .section-title span {
+  width: 42px;
+  height: 42px;
+  font-size: 1.45rem;
+}
+
+body.exporting-dashboard .period-grid div,
+body.exporting-dashboard .operation-grid div {
+  min-height: 112px;
+}
+
+body.exporting-dashboard .period-grid strong {
+  font-size: 3rem;
+}
+
+body.exporting-dashboard .operation-grid b {
+  font-size: 2.55rem;
+}
+
+body.exporting-dashboard .highlight-line {
+  padding: 16px;
+}
+
+body.exporting-dashboard .summary-section {
+  margin-top: 20px;
+}
+
+body.exporting-dashboard .summary-grid {
+  gap: 14px;
+}
+
+body.exporting-dashboard .summary-grid div {
+  min-height: 96px;
+  padding: 16px;
+}
+
+body.exporting-dashboard .summary-grid strong {
+  font-size: 2.35rem;
+}
+
+body.exporting-dashboard .summary-total strong {
+  font-size: 3rem;
+}
+
 @media (max-width: 640px) {
   .dashboard-header {
     grid-template-columns: 58px 1fr;
