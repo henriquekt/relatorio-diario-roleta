@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gerador de Relatório Diário</title>
-    <link rel="stylesheet" href="style.css?v=4" />
+    <link rel="stylesheet" href="style.css?v=5" />
     <style>
       body.exporting-dashboard .dashboard-card {
         display: flex;
@@ -59,7 +59,7 @@
               <input id="reportDate" name="reportDate" type="text" value="18/05/2026" />
             </label>
             <label>
-              Clientes do dia
+              Vendas do dia
               <input id="clients" name="clients" type="number" min="0" value="33" />
             </label>
             <label>
@@ -82,14 +82,6 @@
               Noite
               <input id="night" name="night" type="number" min="0" value="6" />
             </label>
-            <label>
-              Horário mais movimentado
-              <select id="busiestPeriod" name="busiestPeriod">
-                <option value="Manhã">Manhã</option>
-                <option value="Tarde">Tarde</option>
-                <option value="Noite" selected>Noite</option>
-              </select>
-            </label>
           </fieldset>
 
           <fieldset>
@@ -105,10 +97,6 @@
             <label>
               Delivery
               <input id="revenueDelivery" name="revenueDelivery" type="text" value="R$ 132,00" />
-            </label>
-            <label>
-              Ticket médio
-              <input id="averageTicket" name="averageTicket" type="text" value="R$ 25,00" />
             </label>
           </fieldset>
 
@@ -192,9 +180,9 @@
             <div class="metric-stack">
               <div class="mini-card">
                 <span class="metric-icon sales">👥</span>
-                <p>Clientes do dia</p>
+                <p>Vendas do dia</p>
                 <strong id="viewClients">33</strong>
-                <small>Pessoas entraram na loja</small>
+                <small>Pedidos registrados no sistema</small>
               </div>
               <div class="mini-card">
                 <span class="metric-icon gold">🎟</span>
@@ -254,8 +242,8 @@
                 <h3>Vendas</h3>
               </div>
               <div class="list-lines compact">
-                <div><span>Ticket médio</span><b id="viewAverageTicket">R$ 25,00</b></div>
-                <div><span>Horário mais movimentado</span><b id="viewBusiestPeriod">Noite</b></div>
+                <div><span>Ticket médio</span><b id="viewAverageTicket">R$ 33,38</b></div>
+                <div><span>Horário mais movimentado</span><b id="viewBusiestPeriod">Tarde / Noite</b></div>
               </div>
             </div>
 
@@ -300,9 +288,9 @@
               <h3>Resumo do dia</h3>
             </div>
             <div class="summary-grid">
-              <div><span>👥 Clientes atendidos</span><strong id="summaryClients">33</strong></div>
+              <div><span>👥 Vendas registradas</span><strong id="summaryClients">33</strong></div>
               <div><span>🎟 Compras acima de R$20</span><strong id="summaryPurchases20">15</strong></div>
-              <div><span>◎ Participantes da roleta</span><strong id="summaryParticipants">15</strong></div>
+              <div><span>◎ Participantes da roleta</span><strong id="summaryParticipants">14</strong></div>
               <div><span>🛵 Vendas delivery</span><strong id="summaryDeliverySales">4</strong></div>
               <div class="summary-total"><span>💰 Faturamento total</span><strong id="summaryTotalRevenue">R$ 1.101,40</strong></div>
             </div>
@@ -312,6 +300,6 @@
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-    <script src="script.js?v=4"></script>
+    <script src="script.js?v=5"></script>
   </body>
 </html>
