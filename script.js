@@ -11,7 +11,8 @@ const prizeLabels = {
 };
 
 function getValue(id) {
-  return document.getElementById(id).value.trim();
+  const element = document.getElementById(id);
+  return element ? element.value.trim() : "";
 }
 
 function getNumber(id) {
@@ -47,28 +48,51 @@ function getTopPrize(prizes) {
   return topPrizeValue > 0 ? prizeLabels[topPrizeId] : "Nenhum prêmio";
 }
 
+function getBusiestPeriod(periods) {
+  const highestValue = Math.max(periods.morning, periods.afternoon, periods.night);
+
+  if (highestValue <= 0) {
+    return "-";
+  }
+
+  const names = [];
+
+  if (periods.morning === highestValue) names.push("Manhã");
+  if (periods.afternoon === highestValue) names.push("Tarde");
+  if (periods.night === highestValue) names.push("Noite");
+
+  return names.join(" / ");
+}
+
 function collectReportData() {
   const revenueCoxinha = parseBrazilianCurrency(getValue("revenueCoxinha"));
   const revenueMix = parseBrazilianCurrency(getValue("revenueMix"));
   const revenueDelivery = parseBrazilianCurrency(getValue("revenueDelivery"));
   const totalRevenue = revenueCoxinha + revenueMix + revenueDelivery;
 
+  const clients = getNumber("clients");
   const purchases20 = getNumber("purchases20");
+  const morning = getNumber("morning");
+  const afternoon = getNumber("afternoon");
+  const night = getNumber("night");
+  const participants = morning + afternoon + night;
+  const averageTicket = clients > 0 ? totalRevenue / clients : 0;
+  const busiestPeriod = getBusiestPeriod({ morning, afternoon, night });
 
   return {
     reportDate: getValue("reportDate") || "-",
-    clients: getNumber("clients"),
+    clients,
     purchases20,
-    participants: purchases20,
-    morning: getNumber("morning"),
-    afternoon: getNumber("afternoon"),
-    night: getNumber("night"),
-    busiestPeriod: getValue("busiestPeriod"),
+    participants,
+    morning,
+    afternoon,
+    night,
+    busiestPeriod,
     revenueCoxinha,
     revenueMix,
     revenueDelivery,
     totalRevenue,
-    averageTicket: parseBrazilianCurrency(getValue("averageTicket")),
+    averageTicket,
     deliverySales: getNumber("deliverySales"),
     adInvestment: parseBrazilianCurrency(getValue("adInvestment")),
     prizes: {
