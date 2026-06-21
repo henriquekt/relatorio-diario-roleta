@@ -2,6 +2,7 @@ const form = document.getElementById("report-form");
 const updateButton = document.getElementById("updateDashboard");
 const downloadButton = document.getElementById("downloadPng");
 const dashboard = document.getElementById("dashboard");
+const validationMessage = document.getElementById("validationMessage");
 
 const prizeLabels = {
   prizeCoxinha: "Pote P de Coxinha",
@@ -109,8 +110,32 @@ function collectReportData() {
   };
 }
 
+function validateReportData(data) {
+  if (data.participants > data.clients) {
+    return {
+      isValid: false,
+      message: "Confira os números: participantes da roleta não podem ser maiores que as vendas do dia.",
+    };
+  }
+
+  return {
+    isValid: true,
+    message: "",
+  };
+}
+
+function applyValidationState(validation) {
+  if (validationMessage) {
+    validationMessage.textContent = validation.message;
+  }
+
+  downloadButton.disabled = !validation.isValid;
+  downloadButton.title = validation.isValid ? "" : validation.message;
+}
+
 function updateDashboard() {
   const data = collectReportData();
+  const validation = validateReportData(data);
 
   setText("viewDate", data.reportDate);
   setText("viewClients", data.clients);
@@ -147,10 +172,19 @@ function updateDashboard() {
   setText("summaryAverageTicket", formatCurrency(data.averageTicket));
   setText("summaryDeliverySales", data.deliverySales);
   setText("summaryTotalRevenue", formatCurrency(data.totalRevenue));
+
+  applyValidationState(validation);
+
+  return { data, validation };
 }
 
 async function downloadDashboardPng() {
-  updateDashboard();
+  const { validation } = updateDashboard();
+
+  if (!validation.isValid) {
+    alert(validation.message);
+    return;
+  }
 
   if (!window.html2canvas) {
     alert("A biblioteca de imagem não carregou. Abra com internet ou publique no GitHub Pages para baixar o PNG.");
@@ -196,8 +230,8 @@ async function downloadDashboardPng() {
     alert("Não foi possível baixar a imagem. Se estiver abrindo como arquivo local, publique no GitHub Pages ou rode em um servidor local.");
   } finally {
     document.body.classList.remove("exporting-dashboard");
-    downloadButton.disabled = false;
     downloadButton.textContent = "Baixar imagem PNG";
+    updateDashboard();
   }
 }
 
