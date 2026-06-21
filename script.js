@@ -39,7 +39,11 @@ function formatCurrency(value) {
 }
 
 function setText(id, value) {
-  document.getElementById(id).textContent = value;
+  const element = document.getElementById(id);
+
+  if (element) {
+    element.textContent = value;
+  }
 }
 
 function getTopPrize(prizes) {
@@ -71,7 +75,6 @@ function collectReportData() {
   const totalRevenue = revenueCoxinha + revenueMix + revenueDelivery;
 
   const clients = getNumber("clients");
-  const purchases20 = getNumber("purchases20");
   const morning = getNumber("morning");
   const afternoon = getNumber("afternoon");
   const night = getNumber("night");
@@ -82,7 +85,6 @@ function collectReportData() {
   return {
     reportDate: getValue("reportDate") || "-",
     clients,
-    purchases20,
     participants,
     morning,
     afternoon,
@@ -112,7 +114,7 @@ function updateDashboard() {
 
   setText("viewDate", data.reportDate);
   setText("viewClients", data.clients);
-  setText("viewPurchases20", data.purchases20);
+  setText("viewParticipants", data.participants);
 
   setText("viewTotalRevenue", formatCurrency(data.totalRevenue));
   setText("viewRevenueCoxinha", formatCurrency(data.revenueCoxinha));
@@ -141,8 +143,8 @@ function updateDashboard() {
   setText("viewMissingItems", data.missingItems);
 
   setText("summaryClients", data.clients);
-  setText("summaryPurchases20", data.purchases20);
   setText("summaryParticipants", data.participants);
+  setText("summaryAverageTicket", formatCurrency(data.averageTicket));
   setText("summaryDeliverySales", data.deliverySales);
   setText("summaryTotalRevenue", formatCurrency(data.totalRevenue));
 }
