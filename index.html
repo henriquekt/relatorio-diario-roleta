@@ -13,6 +13,7 @@
     body.exporting-dashboard .summary-grid strong { font-size: 2.45rem; }
     body.exporting-dashboard .summary-total { grid-column: 1 / -1; }
     body.exporting-dashboard .summary-total strong { font-size: 3.35rem; }
+    .validation-message { min-height: 20px; margin: 10px 2px 0; color: #ff9f3f; font-size: 0.82rem; font-weight: 700; }
   </style>
 </head>
 <body>
@@ -69,6 +70,7 @@
           <button class="primary-button" type="button" id="updateDashboard">Gerar / Atualizar Dashboard</button>
           <button class="secondary-button" type="button" id="downloadPng">Baixar imagem PNG</button>
         </div>
+        <p id="validationMessage" class="validation-message" aria-live="polite"></p>
       </form>
     </section>
 
@@ -170,6 +172,6 @@
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-  <script src="script.js?v=6"></script>
+  <script src="script.js?v=7"></script>
 </body>
 </html>
